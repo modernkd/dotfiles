@@ -57,9 +57,6 @@ format = "[$path]($style)[$read_only]($read_only_style) "
 "Music" = " Music"
 "Pictures" = " Pictures"
 "code" = " code"
-"Music" = " Music"
-"Pictures" = " Pictures"
-"code" = " code"
 
 # ============================================================================
 # GIT

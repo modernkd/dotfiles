@@ -126,6 +126,34 @@ fi
 # OPTIONAL: CASK APPLICATIONS
 # ============================================================================
 
+# Map cask names to their .app bundle names in /Applications
+# This allows idempotent installation even if app was installed manually
+get_app_name() {
+    case "$1" in
+        iterm2) echo "iTerm.app" ;;
+        visual-studio-code) echo "Visual Studio Code.app" ;;
+        *) echo "" ;;
+    esac
+}
+
+# Check if app is already installed (via Homebrew OR manually)
+is_app_installed() {
+    local cask="$1"
+    local app_name=$(get_app_name "$cask")
+    
+    # First check if Homebrew knows about it
+    if brew list --cask "$cask" &>/dev/null; then
+        return 0
+    fi
+    
+    # Then check if the app exists in /Applications (manual install)
+    if [ -n "$app_name" ] && [ -d "/Applications/$app_name" ]; then
+        return 0
+    fi
+    
+    return 1
+}
+
 echo ""
 read -p "Install recommended terminal apps (iTerm2, Visual Studio Code)? (y/n) " -n 1 -r
 echo
@@ -136,7 +164,7 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
     )
     
     for cask in "${CASKS[@]}"; do
-        if brew list --cask "$cask" &>/dev/null; then
+        if is_app_installed "$cask"; then
             print_success "$cask already installed"
         else
             print_info "Installing $cask..."
