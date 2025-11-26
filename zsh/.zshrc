@@ -161,7 +161,6 @@ alias -- -='cd -'
 
 # Quick access directories (customize as needed)
 alias c='cd ~/code'           # Use 'c' to go to code directory
-alias proj='cd ~/code'        # Alternative alias for projects
 alias docs='cd ~/Documents'
 alias dl='cd ~/Downloads'
 alias dt='cd ~/Desktop'
