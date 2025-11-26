@@ -52,11 +52,14 @@ read_only_style = "red"
 format = "[$path]($style)[$read_only]($read_only_style) "
 
 [directory.substitutions]
-"Documents" = "󰈙 "
-"Downloads" = " "
-"Music" = " "
-"Pictures" = " "
-"code" = " "
+"Documents" = "󰈙 Docs"
+"Downloads" = " Downloads"
+"Music" = " Music"
+"Pictures" = " Pictures"
+"code" = " code"
+"Music" = " Music"
+"Pictures" = " Pictures"
+"code" = " code"
 
 # ============================================================================
 # GIT
