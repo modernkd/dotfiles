@@ -1,0 +1,319 @@
+# ============================================================================
+# STARSHIP PROMPT CONFIGURATION
+# ============================================================================
+# Docs: https://starship.rs/config/
+
+# Timeout for commands (ms)
+command_timeout = 1000
+
+# Newline between prompts
+add_newline = true
+
+# Prompt format
+format = """
+$username\
+$hostname\
+$directory\
+$git_branch\
+$git_status\
+$git_state\
+$nodejs\
+$python\
+$rust\
+$golang\
+$docker_context\
+$package\
+$cmd_duration\
+$line_break\
+$character"""
+
+# Right-side prompt
+right_format = """$time"""
+
+# ============================================================================
+# PROMPT CHARACTER
+# ============================================================================
+
+[character]
+success_symbol = "[❯](bold green)"
+error_symbol = "[❯](bold red)"
+vimcmd_symbol = "[❮](bold green)"
+
+# ============================================================================
+# DIRECTORY
+# ============================================================================
+
+[directory]
+truncation_length = 4
+truncate_to_repo = true
+style = "bold cyan"
+read_only = " 🔒"
+read_only_style = "red"
+format = "[$path]($style)[$read_only]($read_only_style) "
+
+[directory.substitutions]
+"Documents" = "󰈙 "
+"Downloads" = " "
+"Music" = " "
+"Pictures" = " "
+"code" = " "
+
+# ============================================================================
+# GIT
+# ============================================================================
+
+[git_branch]
+symbol = " "
+style = "bold purple"
+format = "[$symbol$branch(:$remote_branch)]($style) "
+
+[git_status]
+format = '([\[$all_status$ahead_behind\]]($style) )'
+style = "bold yellow"
+conflicted = "⚔️ "
+ahead = "⇡${count}"
+behind = "⇣${count}"
+diverged = "⇕⇡${ahead_count}⇣${behind_count}"
+untracked = "?${count}"
+stashed = "📦"
+modified = "!${count}"
+staged = "+${count}"
+renamed = "»${count}"
+deleted = "✘${count}"
+
+[git_state]
+format = '\([$state( $progress_current/$progress_total)]($style)\) '
+style = "bold yellow"
+rebase = "REBASING"
+merge = "MERGING"
+revert = "REVERTING"
+cherry_pick = "CHERRY-PICKING"
+bisect = "BISECTING"
+am = "AM"
+am_or_rebase = "AM/REBASE"
+
+# ============================================================================
+# LANGUAGES & TOOLS
+# ============================================================================
+
+[nodejs]
+symbol = " "
+style = "bold green"
+format = "[$symbol($version )]($style)"
+detect_files = ["package.json", ".node-version", ".nvmrc"]
+detect_folders = ["node_modules"]
+
+[python]
+symbol = " "
+style = "bold yellow"
+format = '[${symbol}${pyenv_prefix}(${version} )(\($virtualenv\) )]($style)'
+detect_files = ["requirements.txt", "pyproject.toml", "Pipfile", ".python-version"]
+
+[rust]
+symbol = " "
+style = "bold red"
+format = "[$symbol($version )]($style)"
+
+[golang]
+symbol = " "
+style = "bold cyan"
+format = "[$symbol($version )]($style)"
+
+[docker_context]
+symbol = " "
+style = "bold blue"
+format = "[$symbol$context]($style) "
+only_with_files = true
+detect_files = ["docker-compose.yml", "docker-compose.yaml", "Dockerfile"]
+
+[package]
+symbol = "📦 "
+style = "bold 208"
+format = "[$symbol$version]($style) "
+display_private = false
+
+# ============================================================================
+# COMMAND DURATION
+# ============================================================================
+
+[cmd_duration]
+min_time = 2_000  # Show if command takes > 2 seconds
+format = "took [$duration]($style) "
+style = "bold yellow"
+show_milliseconds = false
+
+# ============================================================================
+# TIME
+# ============================================================================
+
+[time]
+disabled = false
+format = '[$time]($style) '
+style = "dimmed white"
+time_format = "%H:%M"
+
+# ============================================================================
+# USERNAME & HOSTNAME (for SSH sessions)
+# ============================================================================
+
+[username]
+style_user = "bold green"
+style_root = "bold red"
+format = "[$user]($style)@"
+show_always = false
+
+[hostname]
+ssh_only = true
+format = "[$hostname]($style) "
+style = "bold green"
+
+# ============================================================================
+# DISABLED MODULES (for performance)
+# ============================================================================
+
+[aws]
+disabled = true
+
+[gcloud]
+disabled = true
+
+[azure]
+disabled = true
+
+[kubernetes]
+disabled = true
+
+[terraform]
+disabled = true
+
+[vagrant]
+disabled = true
+
+[nix_shell]
+disabled = true
+
+[conda]
+disabled = true
+
+[perl]
+disabled = true
+
+[php]
+disabled = true
+
+[ruby]
+disabled = true
+
+[swift]
+disabled = true
+
+[kotlin]
+disabled = true
+
+[java]
+disabled = true
+
+[lua]
+disabled = true
+
+[elm]
+disabled = true
+
+[elixir]
+disabled = true
+
+[erlang]
+disabled = true
+
+[haskell]
+disabled = true
+
+[julia]
+disabled = true
+
+[nim]
+disabled = true
+
+[ocaml]
+disabled = true
+
+[purescript]
+disabled = true
+
+[zig]
+disabled = true
+
+[vlang]
+disabled = true
+
+[crystal]
+disabled = true
+
+[dart]
+disabled = true
+
+[deno]
+disabled = true
+
+[dotnet]
+disabled = true
+
+[scala]
+disabled = true
+
+[red]
+disabled = true
+
+[rlang]
+disabled = true
+
+[cmake]
+disabled = true
+
+[cobol]
+disabled = true
+
+[daml]
+disabled = true
+
+[buf]
+disabled = true
+
+[meson]
+disabled = true
+
+[spack]
+disabled = true
+
+[memory_usage]
+disabled = true
+
+[battery]
+disabled = true
+
+[env_var]
+disabled = true
+
+[jobs]
+disabled = true
+
+[line_break]
+disabled = false
+
+[shell]
+disabled = true
+
+[shlvl]
+disabled = true
+
+[singularity]
+disabled = true
+
+[status]
+disabled = true
+
+[sudo]
+disabled = true
+
+[vcsh]
+disabled = true

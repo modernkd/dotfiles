@@ -1,0 +1,210 @@
+# ============================================================================
+# GIT CONFIGURATION
+# ============================================================================
+# Copy this to ~/.gitconfig or symlink it
+# Update [user] section with your own name and email
+# ============================================================================
+
+[user]
+    # IMPORTANT: Update these with your own information!
+    name = Your Name
+    email = your@email.com
+    # signingkey = YOUR_GPG_KEY_ID  # Uncomment if using GPG signing
+
+[init]
+    defaultBranch = main
+
+[core]
+    editor = code --wait
+    autocrlf = input
+    whitespace = fix
+    pager = bat --style=plain --paging=always
+    excludesfile = ~/.gitignore_global
+
+[color]
+    ui = auto
+    branch = auto
+    diff = auto
+    status = auto
+
+[color "branch"]
+    current = yellow reverse
+    local = yellow
+    remote = green
+
+[color "diff"]
+    meta = yellow bold
+    frag = magenta bold
+    old = red bold
+    new = green bold
+
+[color "status"]
+    added = green
+    changed = yellow
+    untracked = red
+
+[pull]
+    rebase = true
+
+[push]
+    default = current
+    autoSetupRemote = true
+
+[fetch]
+    prune = true
+
+[rebase]
+    autoStash = true
+
+[merge]
+    conflictstyle = diff3
+    tool = code
+
+[mergetool "code"]
+    cmd = code --wait --merge $REMOTE $LOCAL $BASE $MERGED
+
+[diff]
+    colorMoved = default
+    tool = code
+
+[difftool "code"]
+    cmd = code --wait --diff $LOCAL $REMOTE
+
+# ============================================================================
+# ALIASES
+# ============================================================================
+
+[alias]
+    # Basic shortcuts
+    co = checkout
+    br = branch
+    ci = commit
+    st = status
+    
+    # Staging
+    a = add
+    aa = add --all
+    ap = add --patch
+    
+    # Commits
+    cm = commit -m
+    ca = commit --amend
+    can = commit --amend --no-edit
+    
+    # Branches
+    cb = checkout -b
+    bd = branch -d
+    bD = branch -D
+    
+    # Diff
+    d = diff
+    ds = diff --staged
+    dc = diff --cached
+    
+    # Logging
+    lg = log --oneline --graph --decorate -20
+    lga = log --oneline --graph --decorate --all
+    ll = log --pretty=format:'%C(yellow)%h%Creset %s %C(green)(%cr)%Creset %C(blue)<%an>%Creset' -20
+    hist = log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short
+    
+    # Remote
+    p = push
+    pf = push --force-with-lease
+    pl = pull
+    f = fetch --all --prune
+    
+    # Stash
+    ss = stash
+    sp = stash pop
+    sl = stash list
+    sd = stash drop
+    
+    # Reset
+    unstage = reset HEAD --
+    undo = reset --soft HEAD~1
+    hard = reset --hard
+    
+    # Rebase
+    rb = rebase
+    rbi = rebase -i
+    rbc = rebase --continue
+    rba = rebase --abort
+    
+    # Cherry-pick
+    cp = cherry-pick
+    cpc = cherry-pick --continue
+    cpa = cherry-pick --abort
+    
+    # Utility
+    aliases = config --get-regexp alias
+    branches = branch -a
+    remotes = remote -v
+    tags = tag -l
+    contributors = shortlog --summary --numbered
+    
+    # Show last commit
+    last = log -1 HEAD --stat
+    
+    # Show what I've done today
+    today = log --since=midnight --author="$(git config user.name)" --oneline
+    
+    # Show what I've done this week
+    week = log --since='1 week ago' --author="$(git config user.name)" --oneline
+    
+    # Find commits by message
+    find = log --all --grep
+    
+    # Find commits that added/removed a string
+    search = log -S
+    
+    # Clean up merged branches
+    cleanup = "!git branch --merged | grep -v '\\*\\|main\\|master\\|develop' | xargs -n 1 git branch -d"
+    
+    # Interactive rebase on last n commits
+    reb = "!f() { git rebase -i HEAD~$1; }; f"
+    
+    # Quick fixup commit
+    fixup = "!f() { git commit --fixup=$1; }; f"
+    
+    # Squash last n commits
+    squash = "!f() { git reset --soft HEAD~$1 && git commit; }; f"
+
+# ============================================================================
+# URL SHORTCUTS
+# ============================================================================
+
+[url "git@github.com:"]
+    insteadOf = gh:
+    pushInsteadOf = gh:
+
+[url "git@gitlab.com:"]
+    insteadOf = gl:
+    pushInsteadOf = gl:
+
+# ============================================================================
+# DELTA (optional - better diff viewer)
+# ============================================================================
+# Uncomment if you have delta installed: brew install git-delta
+
+# [core]
+#     pager = delta
+
+# [interactive]
+#     diffFilter = delta --color-only
+
+# [delta]
+#     navigate = true
+#     light = false
+#     side-by-side = true
+#     line-numbers = true
+
+# ============================================================================
+# GPG SIGNING (optional)
+# ============================================================================
+# Uncomment if you want to sign commits
+
+# [commit]
+#     gpgsign = true
+
+# [tag]
+#     gpgsign = true
